@@ -6,7 +6,9 @@
   "scripts": {
     "start:dev": "nodemon server.js",
     "start:prod": "set NODE_ENV=production&&nodemon server.js",
-    "debug": "ndb server.js"
+    "debug": "ndb server.js",
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
+    "build:js": "parcel build ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
   },
   "keywords": [
     "Node.js",
@@ -19,6 +21,8 @@
   "author": "Galelio",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "axios": "^1.6.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "crypto": "^1.0.1",
@@ -54,6 +58,7 @@
     "eslint-plugin-pug": "^1.2.5",
     "eslint-plugin-react": "^7.33.2",
     "nodemon": "^3.0.1",
+    "parcel-bundler": "^1.12.5",
     "prettier": "^3.0.3"
   },
   "engines": {

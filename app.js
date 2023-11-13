@@ -21,7 +21,6 @@ const globalErrorHandler = require('./controllers/errorController');
 
 // controllers
 const AppError = require('./utils/appError');
-const { createBookingCheckout } = require('./controllers/bookingController');
 
 const app = express();
 
@@ -34,8 +33,8 @@ app.set('views', path.join(__dirname, 'views'));
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set security HTTP headers
-app.use(helmet());
+// Set security HTTP headers --> Alot of problems with Pug files to be studied and checked later
+// app.use(helmet());
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
@@ -81,12 +80,11 @@ app.use((req, res, next) => {
   // console.log(req.cookies);
   next();
 });
-
+app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter);
-app.use('/my-tours', createBookingCheckout);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
